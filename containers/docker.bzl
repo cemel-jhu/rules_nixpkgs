@@ -78,6 +78,16 @@ def _nixpkgs_docker_image_impl(repository_ctx):
         executable = False,
     )
 
+    repository_ctx.template(
+        "package.bzl",
+        Label("@io_tweag_rules_nixpkgs//containers:docker/package.bzl.tpl"),
+        substitutions = {
+            "%{name}": repository_ctx.name,
+            "%{args_space_sep}": " ".join(args),
+        },
+        executable = False,
+    )
+
 _nixpkgs_docker_image = repository_rule(
     implementation = _nixpkgs_docker_image_impl,
     attrs = {
