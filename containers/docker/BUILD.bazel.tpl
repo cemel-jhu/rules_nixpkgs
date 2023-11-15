@@ -1,3 +1,11 @@
+package(default_visibility = ["//visibility:public"])
+
+# Bound to target for label.
+sh_binary(
+    name = "nix_build",
+    srcs = [":nix-build"],
+)
+
 sh_binary(
     name = "stream",
     srcs = ["@io_tweag_rules_nixpkgs//containers:docker/stream.sh"],
